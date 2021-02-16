@@ -1,15 +1,13 @@
 module Main exposing (..)
 
 import Element exposing (..)
-import Element.Input exposing (button)
-import Element.Font as Font
 import Element.Background as Background
 import Browser
 import Browser.Dom
-import Element.Border as Border
 import Browser.Dom exposing (Viewport)
 import Task
-import String exposing (toInt)
+
+import Boilerplate as Bp
 
 main = 
   Browser.element
@@ -31,17 +29,11 @@ subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.none
 
-type Msg = Increment 
-         | Decrement 
-         | GotViewport Viewport
+type Msg = GotViewport Viewport
 
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
-    Increment ->
-      (model, Cmd.none)
-    Decrement ->
-      (model, Cmd.none)
     GotViewport vp ->
       (Just vp, Cmd.none)
 
@@ -70,62 +62,10 @@ view model =
         , width fill
         , height fill
         ] (
-          boilerplate vp (
+          Bp.boilerplate vp (
               column [ width fill, centerX]
-                [ whitetext "content goes here"
+                [ Bp.whitetext "content goes here"
                 ]
             )
         )
 
-whitetext : String -> Element msg
-whitetext words =
-  el [Font.color (rgb 1 1 1), coolfont] ( text words)
-
-
-boilerplate : Viewport -> Element msg -> Element msg
-boilerplate vp content = 
-  let
-    aspect = vp.viewport.y / vp.viewport.x
-  in
-    row [width fill, height fill]
-      [ column 
-          -- [ width (percentX vp 20.0)
-          [ width (px 300)
-          , height fill
-          , Background.color (rgb 0.2 0.2 0.2)
-          ]
-          [ el [padding 20] (image 
-              [ centerX
-              -- , Border.rounded 128
-              , Border.glow (rgb 255 255 255) 10
-              ]
-              { src = "https://source.unsplash.com/random/256x256"
-              , description = ""
-              }
-            )
-            
-          , el 
-              [ centerX
-              , coolfont
-              , Font.size 24
-              ]
-              (whitetext "C34A") 
-          ]
-      , el [alignTop] content
-      ]
-
-percentX : Viewport -> Float -> Length
-percentX vp pct =
-    px (round (vp.viewport.x * pct / 100.0))
-
-percentY : Viewport -> Float -> Length
-percentY vp pct =
-    px (round (vp.viewport.y * pct / 100.0))
-
-coolfont = 
-  Font.family 
-    [ Font.external 
-      { name = "Quicksand"
-      , url = "https://fonts.googleapis.com/css2?family=Quicksand&display=swap"
-      }
-    ]
