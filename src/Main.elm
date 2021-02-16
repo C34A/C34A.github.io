@@ -37,18 +37,6 @@ update msg model =
     GotViewport vp ->
       (Just vp, Cmd.none)
 
--- buttons
--- view : Model -> Element Msg
--- view model =
---   column [ width fill, centerX, spacing 10 ]
---     [ button [] 
---       { onPress = Just Increment
---       , label = text "+"} 
---     , text (String.fromInt model)
---     , button []
---       { onPress = Just Decrement
---       , label = text "-"}
---     ]
 
 -- page?
 view : Model -> Element Msg
@@ -56,16 +44,8 @@ view model =
   case model of
     Nothing -> el [width fill, height fill, Background.color (rgb 0.1 0.1 0.12)] (text "")
     Just vp ->
-      el 
-        [ centerX
-        , Background.color (rgb 0.1 0.1 0.12)
-        , width fill
-        , height fill
-        ] (
-          Bp.boilerplate vp (
-              column [ width fill, centerX]
-                [ Bp.whitetext "content goes here"
-                ]
-            )
+      Bp.boilerplate vp (
+          column [ width fill, centerX]
+            [ Bp.whitetext "content goes here"
+            ]
         )
-

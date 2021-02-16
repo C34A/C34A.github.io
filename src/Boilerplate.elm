@@ -33,7 +33,12 @@ boilerplate vp content =
   let
     aspect = vp.viewport.y / vp.viewport.x
   in
-    row [width fill, height fill]
+    row 
+      [ width fill
+      , height fill
+      , centerX
+      , Background.color (rgb 0.1 0.1 0.12)
+      ]
       [ column 
           -- [ width (percentX vp 20.0)
           [ width (px 300)
