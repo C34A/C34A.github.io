@@ -13,6 +13,21 @@ whitetext words =
   el [Font.color (rgb 1 1 1), coolfont] ( text words)
 
 
+wlink : String -> String -> Element msg
+wlink url label =
+  link 
+    [ centerX
+    , paddingEach 
+        { top = 20
+        , left = 0
+        , right = 0
+        , bottom = 0}
+    ]
+    { url = url
+    , label = whitetext label
+    }
+
+
 boilerplate : Viewport -> Element msg -> Element msg
 boilerplate vp content = 
   let
@@ -28,19 +43,23 @@ boilerplate vp content =
           [ el [padding 20] (image 
               [ centerX
               -- , Border.rounded 128
-              , Border.glow (rgb 255 255 255) 10
+              -- , Border.glow (rgb 255 255 255) 5
+              , Border.rounded 128
+              , Border.glow (rgb 0.3 0.3 0.3) 5
+              , clip
               ]
               { src = "https://source.unsplash.com/random/256x256"
               , description = ""
               }
             )
-            
           , el 
               [ centerX
               , coolfont
               , Font.size 24
               ]
-              (whitetext "C34A") 
+              (whitetext "C34A")
+          , wlink "/about" "about"
+          , wlink "/resume" "resumé"
           ]
       , el [alignTop] content
       ]
