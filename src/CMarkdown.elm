@@ -15,11 +15,6 @@ import Markdown.Block as Block exposing (Block, Inline, ListItem(..), Task(..))
 import Markdown.Html
 import Markdown.Parser
 import Markdown.Renderer
-import Element
-import Element
-import Element
-import Element
-import Element
 
 
 toElements : String -> Result String (List (Element msg))
@@ -58,10 +53,10 @@ renderer =
         \image ->
             case image.title of
                 Just title ->
-                    Element.image [ Element.width Element.fill ] { src = image.src, description = image.alt }
+                    Element.image [  ] { src = image.src, description = image.alt }
 
                 Nothing ->
-                    Element.image [ Element.width Element.fill ] { src = image.src, description = image.alt }
+                    Element.image [ ] { src = image.src, description = image.alt }
     , blockQuote =
         \children ->
             Element.paragraph
