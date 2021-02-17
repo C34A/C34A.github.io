@@ -45,6 +45,7 @@ boilerplate vp content =
           [ width (px 300)
           , height fill
           , Background.color (rgb 0.2 0.2 0.2)
+          -- , Background.image "/res/'thijs-slootjes-lVOL-j5XtQY-unsplash.jpg"
           ]
           [ el [padding 20] (image 
               [ centerX
@@ -72,6 +73,8 @@ boilerplate vp content =
       , el 
           [ alignTop
           , padding 30
+          , width fill
+          , height fill
           ]
           content
       ]
