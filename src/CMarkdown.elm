@@ -26,97 +26,199 @@ toElements markdown =
     |> Result.andThen (Markdown.Renderer.render renderer)
 
 
+-- renderer : Markdown.Renderer.Renderer (Element msg)
+-- renderer =
+--   { heading = heading
+--   , paragraph =
+--     Element.paragraph
+--       [ Element.spacing 15 ]
+--   , thematicBreak = Element.none
+--   , text = \value -> Element.paragraph [] [ whitetext value ]
+--   , strong = \content -> Element.paragraph [ Font.bold, Font.color CColors.light ] content
+--   , emphasis = \content -> Element.paragraph [ Font.italic, Font.color CColors.light ] content
+--   , strikethrough = \content -> Element.paragraph [ Font.strike, Font.color CColors.light ] content
+--   , codeSpan = code
+--   , link =
+--     \{ title, destination } body ->
+--       Element.link []
+--         { url = destination
+--         , label =
+--           Element.paragraph
+--             [ Font.color CColors.lightblue
+--             , Element.htmlAttribute (Html.Attributes.style "overflow-wrap" "break-word")
+--             , Element.htmlAttribute (Html.Attributes.style "word-break" "break-word")
+--             ]
+--             body
+--         }
+--   , hardLineBreak = Html.br [] [] |> Element.html
+--   , image =
+--     \image ->
+--       case image.title of
+--         Just title ->
+--           Element.image [ Element.width Element.fill ] { src = image.src, description = image.alt }
+
+--         Nothing ->
+--           Element.image [ Element.width Element.fill ] { src = image.src, description = image.alt }
+--   , blockQuote =
+--     \children ->
+--       Element.paragraph
+--         [ Border.widthEach { top = 0, right = 0, bottom = 0, left = 10 }
+--         , Element.padding 10
+--         , Border.color CColors.lighter
+--         , Background.color CColors.dark
+--         ]
+--         children
+--   , unorderedList =
+--     \items ->
+--       Element.column [ Element.spacing 15 ]
+--         (items
+--           |> List.map
+--             (\(ListItem task children) ->
+--               Element.paragraph [ Element.spacing 5 ]
+--                 [ Element.paragraph
+--                   [ Element.alignTop ]
+--                   ((case task of
+--                     IncompleteTask ->
+--                       Element.Input.defaultCheckbox False
+
+--                     CompletedTask ->
+--                       Element.Input.defaultCheckbox True
+
+--                     NoTask ->
+--                       Element.text "•"
+--                    )
+--                     :: Element.text " "
+--                     :: children
+--                   )
+--                 ]
+--             )
+--         )
+--   , orderedList =
+--     \startingIndex items ->
+--       Element.column [ Element.spacing 15 ]
+--         (items
+--           |> List.indexedMap
+--             (\index itemBlocks ->
+--               Element.paragraph [ Element.spacing 5 ]
+--                 [ Element.paragraph [ Element.alignTop ]
+--                   (Element.text (String.fromInt (index + startingIndex) ++ " ") :: itemBlocks)
+--                 ]
+--             )
+--         )
+--   , codeBlock = codeBlock
+--   , table = Element.column []
+--   , tableHeader =
+--       Element.column
+--         [ Font.bold
+--         , Element.width Element.fill
+--         , Font.center
+--         , Font.color CColors.light
+--         ]
+--   , tableBody = Element.column []
+--   , tableRow = Element.row [ Element.height Element.fill, Element.width Element.fill ]
+--   , tableHeaderCell =
+--         \maybeAlignment children ->
+--             Element.paragraph
+--                 tableBorder
+--                 children
+--     , tableCell =
+--         \maybeAlignment children ->
+--             Element.paragraph
+--                 tableBorder
+--                 children
+--     , html = Markdown.Html.oneOf []
+--     }
+
 renderer : Markdown.Renderer.Renderer (Element msg)
 renderer =
-  { heading = heading
-  , paragraph =
-    Element.paragraph
-      [ Element.spacing 15 ]
-  , thematicBreak = Element.none
-  , text = \value -> Element.paragraph [] [ whitetext value ]
-  , strong = \content -> Element.paragraph [ Font.bold, Font.color CColors.light ] content
-  , emphasis = \content -> Element.paragraph [ Font.italic, Font.color CColors.light ] content
-  , strikethrough = \content -> Element.paragraph [ Font.strike, Font.color CColors.light ] content
-  , codeSpan = code
-  , link =
-    \{ title, destination } body ->
-      Element.link []
-        { url = destination
-        , label =
-          Element.paragraph
-            [ Font.color CColors.lightblue
-            , Element.htmlAttribute (Html.Attributes.style "overflow-wrap" "break-word")
-            , Element.htmlAttribute (Html.Attributes.style "word-break" "break-word")
+    { heading = heading
+    , paragraph =
+        Element.paragraph
+            [ Element.spacing 15 ]
+    , thematicBreak = Element.none
+    , text = \value -> Element.paragraph [] [ Element.text value ]
+    , strong = \content -> Element.paragraph [ Font.bold ] content
+    , emphasis = \content -> Element.paragraph [ Font.italic ] content
+    , strikethrough = \content -> Element.paragraph [ Font.strike ] content
+    , codeSpan = code
+    , link =
+        \{ title, destination } body ->
+            Element.newTabLink []
+                { url = destination
+                , label =
+                    Element.paragraph
+                        [ Font.color (Element.rgb255 0 0 255)
+                        , Element.htmlAttribute (Html.Attributes.style "overflow-wrap" "break-word")
+                        , Element.htmlAttribute (Html.Attributes.style "word-break" "break-word")
+                        ]
+                        body
+                }
+    , hardLineBreak = Html.br [] [] |> Element.html
+    , image =
+        \image ->
+            case image.title of
+                Just title ->
+                    Element.image [ Element.width Element.fill ] { src = image.src, description = image.alt }
+
+                Nothing ->
+                    Element.image [ Element.width Element.fill ] { src = image.src, description = image.alt }
+    , blockQuote =
+        \children ->
+            Element.paragraph
+                [ Border.widthEach { top = 0, right = 0, bottom = 0, left = 10 }
+                , Element.padding 10
+                , Border.color (Element.rgb255 145 145 145)
+                , Background.color (Element.rgb255 245 245 245)
+                ]
+                children
+    , unorderedList =
+        \items ->
+            Element.column [ Element.spacing 15 ]
+                (items
+                    |> List.map
+                        (\(ListItem task children) ->
+                            Element.paragraph [ Element.spacing 5 ]
+                                [ Element.paragraph
+                                    [ Element.alignTop ]
+                                    ((case task of
+                                        IncompleteTask ->
+                                            Element.Input.defaultCheckbox False
+
+                                        CompletedTask ->
+                                            Element.Input.defaultCheckbox True
+
+                                        NoTask ->
+                                            Element.text "•"
+                                     )
+                                        :: Element.text " "
+                                        :: children
+                                    )
+                                ]
+                        )
+                )
+    , orderedList =
+        \startingIndex items ->
+            Element.column [ Element.spacing 15 ]
+                (items
+                    |> List.indexedMap
+                        (\index itemBlocks ->
+                            Element.paragraph [ Element.spacing 5 ]
+                                [ Element.paragraph [ Element.alignTop ]
+                                    (Element.text (String.fromInt (index + startingIndex) ++ " ") :: itemBlocks)
+                                ]
+                        )
+                )
+    , codeBlock = codeBlock
+    , table = Element.column []
+    , tableHeader =
+        Element.column
+            [ Font.bold
+            , Element.width Element.fill
+            , Font.center
             ]
-            body
-        }
-  , hardLineBreak = Html.br [] [] |> Element.html
-  , image =
-    \image ->
-      case image.title of
-        Just title ->
-          Element.image [ Element.width Element.fill ] { src = image.src, description = image.alt }
-
-        Nothing ->
-          Element.image [ Element.width Element.fill ] { src = image.src, description = image.alt }
-  , blockQuote =
-    \children ->
-      Element.paragraph
-        [ Border.widthEach { top = 0, right = 0, bottom = 0, left = 10 }
-        , Element.padding 10
-        , Border.color CColors.lighter
-        , Background.color CColors.dark
-        ]
-        children
-  , unorderedList =
-    \items ->
-      Element.column [ Element.spacing 15 ]
-        (items
-          |> List.map
-            (\(ListItem task children) ->
-              Element.paragraph [ Element.spacing 5 ]
-                [ Element.paragraph
-                  [ Element.alignTop ]
-                  ((case task of
-                    IncompleteTask ->
-                      Element.Input.defaultCheckbox False
-
-                    CompletedTask ->
-                      Element.Input.defaultCheckbox True
-
-                    NoTask ->
-                      Element.text "•"
-                   )
-                    :: Element.text " "
-                    :: children
-                  )
-                ]
-            )
-        )
-  , orderedList =
-    \startingIndex items ->
-      Element.column [ Element.spacing 15 ]
-        (items
-          |> List.indexedMap
-            (\index itemBlocks ->
-              Element.paragraph [ Element.spacing 5 ]
-                [ Element.paragraph [ Element.alignTop ]
-                  (Element.text (String.fromInt (index + startingIndex) ++ " ") :: itemBlocks)
-                ]
-            )
-        )
-  , codeBlock = codeBlock
-  , table = Element.column []
-  , tableHeader =
-      Element.column
-        [ Font.bold
-        , Element.width Element.fill
-        , Font.center
-        , Font.color CColors.light
-        ]
-  , tableBody = Element.column []
-  , tableRow = Element.row [ Element.height Element.fill, Element.width Element.fill ]
-  , tableHeaderCell =
+    , tableBody = Element.column []
+    , tableRow = Element.row [ Element.height Element.fill, Element.width Element.fill ]
+    , tableHeaderCell =
         \maybeAlignment children ->
             Element.paragraph
                 tableBorder
