@@ -3,14 +3,15 @@ module Boilerplate exposing (..)
 import Element exposing (..)
 import Element.Background as Background
 import Browser
-import Browser.Dom
 import Browser.Dom exposing (Viewport)
 import Element.Font as Font
 import Element.Border as Border
 
+import CColors as C
+
 whitetext : String -> Element msg
 whitetext words =
-  el [Font.color (rgb 1 1 1), coolfont] ( text words)
+  el [Font.color C.light, coolfont] ( text words)
 
 
 wlink : String -> String -> Element msg
@@ -52,8 +53,10 @@ boilerplate vp content =
               , Border.rounded 128
               , Border.glow (rgb 0.3 0.3 0.3) 5
               , clip
+              , width (px 256)
+              , height (px 256)
               ]
-              { src = "https://source.unsplash.com/random/256x256"
+              { src = "/res/spaceman-2.png" --"https://source.unsplash.com/random/256x256"
               , description = ""
               }
             )
@@ -63,10 +66,14 @@ boilerplate vp content =
               , Font.size 24
               ]
               (whitetext "C34A")
-          , wlink "/about" "about"
+          , wlink "/" "about"
           , wlink "/resume" "resumé"
           ]
-      , el [alignTop] content
+      , el 
+          [ alignTop
+          , padding 30
+          ]
+          content
       ]
 
 percentX : Viewport -> Float -> Length
