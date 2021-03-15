@@ -5,6 +5,7 @@ import Url
 import Url.Parser as UP exposing (Parser, (</>), oneOf, s, string, top)
 
 import About
+import Resume
 
 type Route
   = About
@@ -41,4 +42,5 @@ getPage : Route -> Element msg
 getPage route = 
   case route of
     About -> About.pageContent
+    Resume -> Resume.pageContent
     _ -> el [] (text "todo!")

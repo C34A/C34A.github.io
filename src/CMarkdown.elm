@@ -9,6 +9,7 @@ import Element.Font as Font
 import Element.Input
 import Element.Region
 import Html exposing (Attribute, Html)
+import Html
 import Html.Attributes
 import Html.Attributes exposing (contenteditable)
 import Markdown.Block as Block exposing (Block, Inline, ListItem(..), Task(..))
@@ -16,6 +17,9 @@ import Markdown.Html
 import Markdown.Parser
 import Markdown.Renderer
 
+-- This code is closely derrived from the elm-ui example for 
+-- elm-markdown (https://github.com/dillonkearns/elm-markdown/blob/master/examples/src/ElmUi.elm)
+-- which is made available under the BSD 3-clause license.
 
 toElements : String -> Result String (List (Element msg))
 toElements markdown =
@@ -36,18 +40,7 @@ renderer =
     , emphasis = \content -> Element.paragraph [ Font.italic, Font.color CColors.light ] content
     , strikethrough = \content -> Element.paragraph [ Font.strike, Font.color CColors.light ] content
     , codeSpan = code
-    , link =
-        \{ title, destination } body ->
-            Element.newTabLink []
-                { url = destination
-                , label =
-                    Element.paragraph
-                        [ Font.color (Element.rgb 0.8 0.8 1.0)
-                        , Element.htmlAttribute (Html.Attributes.style "overflow-wrap" "break-word")
-                        , Element.htmlAttribute (Html.Attributes.style "word-break" "break-word")
-                        ]
-                        body
-                }
+    , link = link            
     , hardLineBreak = Html.br [] [] |> Element.html
     , image =
         \image ->
@@ -147,16 +140,21 @@ heading { level, rawText, children } =
         [ Font.size
             (case level of
                 Block.H1 ->
-                    36
+                    40
 
                 Block.H2 ->
+                    36
+
+                Block.H3 ->
                     24
+                
+                Block.H4 -> 20
 
                 _ ->
-                    20
+                    16
             )
         , Font.bold
-        , Boilerplate.coolfont
+        -- , Boilerplate.coolfont
         , Element.padding 15
         , Element.Region.heading (Block.headingLevelToInt level)
         , Element.htmlAttribute
@@ -165,6 +163,32 @@ heading { level, rawText, children } =
             (Html.Attributes.id (rawTextToId rawText))
         ]
         children
+
+link : { destination : String, title : Maybe String } -> List (Element msg) -> Element msg
+link { title, destination } body =
+    Element.newTabLink []
+        { url = destination
+        , label =
+            Element.paragraph
+                [ Font.color (Element.rgb 0.0 0.0 1.0)
+                , Element.htmlAttribute (Html.Attributes.style "overflow-wrap" "break-word")
+                , Element.htmlAttribute (Html.Attributes.style "word-break" "break-word")
+                ]
+                -- links just are white i guess, i can't manage to override the color
+                -- [Element.html 
+                --     ( Html.div 
+                --         [ Html.Attributes.style "color" "blue !important" ]
+                --         [ Element.layout 
+                --             [] 
+                --             ( case (List.head body) of
+                --                    Just x -> x
+                --                    Nothing -> Element.text ""
+                --             )
+                --         ]
+                --     )
+                -- ]
+                body
+        }
 
 code : String -> Element msg
 code snippet =
