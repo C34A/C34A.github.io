@@ -6,10 +6,13 @@ import Url.Parser as UP exposing (Parser, (</>), oneOf, s, string, top)
 
 import About
 import Resume
+import Contact
+import Projects
 
 type Route
   = About
   | Resume
+  | Contact
   | Projects
   | Project String
   | NotFound
@@ -24,6 +27,7 @@ routeParse =
   oneOf
     [ UP.map About (s "about")
     , UP.map About top
+    , UP.map Contact (s "contact")
     , UP.map Resume (s "resume")
     , UP.map Projects (s "projects")
     , UP.map Project (s "project" </> string)
@@ -33,6 +37,7 @@ routeToString : Route -> String
 routeToString route =
   case route of
     About -> "About"
+    Contact -> "Contact"
     Resume -> "Resume"
     Projects -> "Projects"
     Project str -> "Project (" ++ str ++ ")"
@@ -43,4 +48,7 @@ getPage route =
   case route of
     About -> About.pageContent
     Resume -> Resume.pageContent
-    _ -> el [] (text "todo!")
+    Contact -> Contact.pageContent
+    Projects -> Projects.pageContent
+    Project p -> Projects.getProjectPage p
+    _ -> el [] (text (routeToString route))

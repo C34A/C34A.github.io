@@ -8,7 +8,6 @@ import Element.Font as Font
 import Element.Border as Border
 
 import CColors as C
-
 whitetext : String -> Element msg
 whitetext words =
   el [Font.color C.light, coolfont] ( text words)
@@ -18,11 +17,7 @@ wlink : String -> String -> Element msg
 wlink url label =
   link 
     [ centerX
-    , paddingEach 
-        { top = 20
-        , left = 0
-        , right = 0
-        , bottom = 0}
+    , spaceEvenly
     ]
     { url = url
     , label = whitetext label
@@ -64,11 +59,19 @@ boilerplate vp content =
           , el 
               [ centerX
               , coolfont
-              , Font.size 24
+              , Font.size 36
               ]
               (whitetext "C34A")
-          , wlink "/" "about"
-          , wlink "/resume" "resumé"
+          , column 
+              [ spacing 20
+              , centerX
+              , paddingEach {top = 20, bottom = 0, right = 0, left = 0}
+              ]
+              [ wlink "/" "about"
+              , wlink "/resume" "resumé"
+              , wlink "/projects" "projects"
+              , wlink "/contact" "contact"
+              ]
           ]
       , el 
           [ alignTop
@@ -94,3 +97,4 @@ coolfont =
       , url = "https://fonts.googleapis.com/css2?family=Quicksand&display=swap"
       }
     ]
+

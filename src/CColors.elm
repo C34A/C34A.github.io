@@ -7,4 +7,4 @@ lighter = rgb 0.2 0.2 0.2
 
 light = rgb 0.9 0.9 0.92
 
-lightblue = rgb 0.9 0.9 1.0
+lightblue = rgb 0.7 0.7 1.0
