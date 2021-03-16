@@ -6107,6 +6107,7 @@ var $elm$url$Url$Parser$parse = F2(
 					url.fragment,
 					$elm$core$Basics$identity)));
 	});
+var $author$project$Pages$Contact = {$: 'Contact'};
 var $author$project$Pages$Project = function (a) {
 	return {$: 'Project', a: a};
 };
@@ -6260,6 +6261,10 @@ var $author$project$Pages$routeParse = $elm$url$Url$Parser$oneOf(
 			$author$project$Pages$About,
 			$elm$url$Url$Parser$s('about')),
 			A2($elm$url$Url$Parser$map, $author$project$Pages$About, $elm$url$Url$Parser$top),
+			A2(
+			$elm$url$Url$Parser$map,
+			$author$project$Pages$Contact,
+			$elm$url$Url$Parser$s('contact')),
 			A2(
 			$elm$url$Url$Parser$map,
 			$author$project$Pages$Resume,
@@ -12090,6 +12095,40 @@ var $mdgriffith$elm_ui$Element$padding = function (x) {
 			f,
 			f));
 };
+var $mdgriffith$elm_ui$Internal$Model$paddingName = F4(
+	function (top, right, bottom, left) {
+		return 'pad-' + ($elm$core$String$fromInt(top) + ('-' + ($elm$core$String$fromInt(right) + ('-' + ($elm$core$String$fromInt(bottom) + ('-' + $elm$core$String$fromInt(left)))))));
+	});
+var $mdgriffith$elm_ui$Element$paddingEach = function (_v0) {
+	var top = _v0.top;
+	var right = _v0.right;
+	var bottom = _v0.bottom;
+	var left = _v0.left;
+	if (_Utils_eq(top, right) && (_Utils_eq(top, bottom) && _Utils_eq(top, left))) {
+		var topFloat = top;
+		return A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$padding,
+			A5(
+				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+				'p-' + $elm$core$String$fromInt(top),
+				topFloat,
+				topFloat,
+				topFloat,
+				topFloat));
+	} else {
+		return A2(
+			$mdgriffith$elm_ui$Internal$Model$StyleClass,
+			$mdgriffith$elm_ui$Internal$Flag$padding,
+			A5(
+				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
+				A4($mdgriffith$elm_ui$Internal$Model$paddingName, top, right, bottom, left),
+				top,
+				right,
+				bottom,
+				left));
+	}
+};
 var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
 	return {$: 'Px', a: a};
 };
@@ -12142,6 +12181,25 @@ var $mdgriffith$elm_ui$Element$Font$size = function (i) {
 		$mdgriffith$elm_ui$Internal$Model$StyleClass,
 		$mdgriffith$elm_ui$Internal$Flag$fontSize,
 		$mdgriffith$elm_ui$Internal$Model$FontSize(i));
+};
+var $mdgriffith$elm_ui$Internal$Model$SpacingStyle = F3(
+	function (a, b, c) {
+		return {$: 'SpacingStyle', a: a, b: b, c: c};
+	});
+var $mdgriffith$elm_ui$Internal$Flag$spacing = $mdgriffith$elm_ui$Internal$Flag$flag(3);
+var $mdgriffith$elm_ui$Internal$Model$spacingName = F2(
+	function (x, y) {
+		return 'spacing-' + ($elm$core$String$fromInt(x) + ('-' + $elm$core$String$fromInt(y)));
+	});
+var $mdgriffith$elm_ui$Element$spacing = function (x) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$spacing,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$SpacingStyle,
+			A2($mdgriffith$elm_ui$Internal$Model$spacingName, x, x),
+			x,
+			x));
 };
 var $mdgriffith$elm_ui$Internal$Flag$fontColor = $mdgriffith$elm_ui$Internal$Flag$flag(14);
 var $mdgriffith$elm_ui$Element$Font$color = function (fontColor) {
@@ -12208,50 +12266,13 @@ var $mdgriffith$elm_ui$Element$link = F2(
 				_List_fromArray(
 					[label])));
 	});
-var $mdgriffith$elm_ui$Internal$Model$paddingName = F4(
-	function (top, right, bottom, left) {
-		return 'pad-' + ($elm$core$String$fromInt(top) + ('-' + ($elm$core$String$fromInt(right) + ('-' + ($elm$core$String$fromInt(bottom) + ('-' + $elm$core$String$fromInt(left)))))));
-	});
-var $mdgriffith$elm_ui$Element$paddingEach = function (_v0) {
-	var top = _v0.top;
-	var right = _v0.right;
-	var bottom = _v0.bottom;
-	var left = _v0.left;
-	if (_Utils_eq(top, right) && (_Utils_eq(top, bottom) && _Utils_eq(top, left))) {
-		var topFloat = top;
-		return A2(
-			$mdgriffith$elm_ui$Internal$Model$StyleClass,
-			$mdgriffith$elm_ui$Internal$Flag$padding,
-			A5(
-				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-				'p-' + $elm$core$String$fromInt(top),
-				topFloat,
-				topFloat,
-				topFloat,
-				topFloat));
-	} else {
-		return A2(
-			$mdgriffith$elm_ui$Internal$Model$StyleClass,
-			$mdgriffith$elm_ui$Internal$Flag$padding,
-			A5(
-				$mdgriffith$elm_ui$Internal$Model$PaddingStyle,
-				A4($mdgriffith$elm_ui$Internal$Model$paddingName, top, right, bottom, left),
-				top,
-				right,
-				bottom,
-				left));
-	}
-};
+var $mdgriffith$elm_ui$Element$spaceEvenly = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$spacing, $mdgriffith$elm_ui$Internal$Style$classes.spaceEvenly);
 var $author$project$Boilerplate$wlink = F2(
 	function (url, label) {
 		return A2(
 			$mdgriffith$elm_ui$Element$link,
 			_List_fromArray(
-				[
-					$mdgriffith$elm_ui$Element$centerX,
-					$mdgriffith$elm_ui$Element$paddingEach(
-					{bottom: 0, left: 0, right: 0, top: 20})
-				]),
+				[$mdgriffith$elm_ui$Element$centerX, $mdgriffith$elm_ui$Element$spaceEvenly]),
 			{
 				label: $author$project$Boilerplate$whitetext(label),
 				url: url
@@ -12313,11 +12334,25 @@ var $author$project$Boilerplate$boilerplate = F2(
 								[
 									$mdgriffith$elm_ui$Element$centerX,
 									$author$project$Boilerplate$coolfont,
-									$mdgriffith$elm_ui$Element$Font$size(24)
+									$mdgriffith$elm_ui$Element$Font$size(36)
 								]),
 							$author$project$Boilerplate$whitetext('C34A')),
-							A2($author$project$Boilerplate$wlink, '/', 'about'),
-							A2($author$project$Boilerplate$wlink, '/resume', 'resumé')
+							A2(
+							$mdgriffith$elm_ui$Element$column,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$spacing(20),
+									$mdgriffith$elm_ui$Element$centerX,
+									$mdgriffith$elm_ui$Element$paddingEach(
+									{bottom: 0, left: 0, right: 0, top: 20})
+								]),
+							_List_fromArray(
+								[
+									A2($author$project$Boilerplate$wlink, '/', 'about'),
+									A2($author$project$Boilerplate$wlink, '/resume', 'resumé'),
+									A2($author$project$Boilerplate$wlink, '/projects', 'projects'),
+									A2($author$project$Boilerplate$wlink, '/contact', 'contact')
+								]))
 						])),
 					A2(
 					$mdgriffith$elm_ui$Element$el,
@@ -12331,7 +12366,39 @@ var $author$project$Boilerplate$boilerplate = F2(
 					content)
 				]));
 	});
-var $author$project$About$rawMd = '\n# Welcome to my website!\n\nI plan to use this to publish a bit more information about \nprojects I\'ve been working on, and perhaps other things at some\n point.\n\n\nThis site might be a bit broken. I\'m pretty new to web development.\n\n## About me\n\nI am a young pacific-northwesterner with interests including software/game\n development and robotics.\n';
+var $author$project$Projects$colPage = function (l) {
+	return A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+				$mdgriffith$elm_ui$Element$spacing(20)
+			]),
+		l);
+};
+var $author$project$CColors$lightblue = A3($mdgriffith$elm_ui$Element$rgb, 0.7, 0.7, 1.0);
+var $mdgriffith$elm_ui$Internal$Model$Describe = function (a) {
+	return {$: 'Describe', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Model$Paragraph = {$: 'Paragraph'};
+var $mdgriffith$elm_ui$Element$paragraph = F2(
+	function (attrs, children) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asParagraph,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Internal$Model$Describe($mdgriffith$elm_ui$Internal$Model$Paragraph),
+				A2(
+					$elm$core$List$cons,
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					A2(
+						$elm$core$List$cons,
+						$mdgriffith$elm_ui$Element$spacing(5),
+						attrs))),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
+	});
 var $elm$core$Result$andThen = F2(
 	function (callback, result) {
 		if (result.$ === 'Ok') {
@@ -19524,47 +19591,6 @@ var $author$project$CMarkdown$code = function (snippet) {
 		$mdgriffith$elm_ui$Element$text(snippet));
 };
 var $mdgriffith$elm_ui$Element$htmlAttribute = $mdgriffith$elm_ui$Internal$Model$Attr;
-var $mdgriffith$elm_ui$Internal$Model$Describe = function (a) {
-	return {$: 'Describe', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$Paragraph = {$: 'Paragraph'};
-var $mdgriffith$elm_ui$Internal$Model$SpacingStyle = F3(
-	function (a, b, c) {
-		return {$: 'SpacingStyle', a: a, b: b, c: c};
-	});
-var $mdgriffith$elm_ui$Internal$Flag$spacing = $mdgriffith$elm_ui$Internal$Flag$flag(3);
-var $mdgriffith$elm_ui$Internal$Model$spacingName = F2(
-	function (x, y) {
-		return 'spacing-' + ($elm$core$String$fromInt(x) + ('-' + $elm$core$String$fromInt(y)));
-	});
-var $mdgriffith$elm_ui$Element$spacing = function (x) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$spacing,
-		A3(
-			$mdgriffith$elm_ui$Internal$Model$SpacingStyle,
-			A2($mdgriffith$elm_ui$Internal$Model$spacingName, x, x),
-			x,
-			x));
-};
-var $mdgriffith$elm_ui$Element$paragraph = F2(
-	function (attrs, children) {
-		return A4(
-			$mdgriffith$elm_ui$Internal$Model$element,
-			$mdgriffith$elm_ui$Internal$Model$asParagraph,
-			$mdgriffith$elm_ui$Internal$Model$div,
-			A2(
-				$elm$core$List$cons,
-				$mdgriffith$elm_ui$Internal$Model$Describe($mdgriffith$elm_ui$Internal$Model$Paragraph),
-				A2(
-					$elm$core$List$cons,
-					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
-					A2(
-						$elm$core$List$cons,
-						$mdgriffith$elm_ui$Element$spacing(5),
-						attrs))),
-			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
-	});
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $author$project$CMarkdown$codeBlock = function (details) {
@@ -20211,6 +20237,68 @@ var $author$project$CMarkdown$toElements = function (markdown) {
 			},
 			$dillonkearns$elm_markdown$Markdown$Parser$parse(markdown)));
 };
+var $author$project$Projects$tryMarkdown = function (text) {
+	var _v0 = $author$project$CMarkdown$toElements(text);
+	if (_v0.$ === 'Err') {
+		var str = _v0.a;
+		return A2(
+			$mdgriffith$elm_ui$Element$el,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Font$color($author$project$CColors$light)
+				]),
+			$mdgriffith$elm_ui$Element$text('ERROR: ' + str));
+	} else {
+		var content = _v0.a;
+		return $author$project$Projects$colPage(content);
+	}
+};
+var $mdgriffith$elm_ui$Element$Font$underline = $mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.underline);
+var $author$project$Projects$getProjectPage = function (proj) {
+	switch (proj) {
+		case 'test':
+			return $author$project$Projects$tryMarkdown('This is a test page!');
+		case 'vm1':
+			return $author$project$Projects$colPage(
+				_List_fromArray(
+					[
+						$author$project$Projects$tryMarkdown('\n# VM1\n\nThis is the main project I am working on, currently.\nVM1 is a very minimal virtual machine, inspired by Apple 2 era computers, and intended for retro game programming.\nIt\'s still pretty thoroughtly not done, but is technically turing complete in its current state.\n'),
+						A2(
+						$mdgriffith$elm_ui$Element$link,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$color($author$project$CColors$lightblue),
+								$mdgriffith$elm_ui$Element$Font$underline,
+								$mdgriffith$elm_ui$Element$Font$size(18)
+							]),
+						{
+							label: $mdgriffith$elm_ui$Element$text('Github page'),
+							url: 'https://github.com/C34A/vm1'
+						}),
+						$author$project$Projects$tryMarkdown('\n\n## features\n- simple instructionset (i am lazy)\n- built-in assembler\n- windowed output\n\n## example\n\nA short program that continuously prints out the alphabet:\n\n```\n\nset r0 65 ; \'A\'\n\nset r1 31167 ; screen start addr\n\nset r2 32767 ; screen end + 1\n\nset r4 91 ; \'Z\' + 1\n\nloop:\n\nstore r0 @r1 ; write to "pixel"\n\ninc r1 1 ; next addr\n\ninc r0 1 ; next char\n\njlt r0 r4 :test ; don\'t go past \'Z\'\n\nset r0 65\n\ntest:\n\njlt r1 r2 :loop ; if at end, draw and reset drawing pointer\n\ndraw\n\nset r1 31167\n\njmp :loop\n\n```\n\nIt isn\'t actually all on one line, for some reason the markdown library I\'m using for this site is deleting all the newlines. \ndunno. I\'m probably going to remake the site with gatsby or next.js or something at some point, so I don\'t *really* care.\n\n![a screenshot](https://github.com/C34A/vm1/blob/master/res/screenshot.png?raw=true)\n')
+					]));
+		default:
+			return A2(
+				$mdgriffith$elm_ui$Element$paragraph,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$author$project$Projects$tryMarkdown('Page not found!'),
+						A2(
+						$mdgriffith$elm_ui$Element$link,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$color($author$project$CColors$lightblue),
+								$mdgriffith$elm_ui$Element$Font$underline
+							]),
+						{
+							label: $mdgriffith$elm_ui$Element$text('Return to projects page'),
+							url: '/projects'
+						})
+					]));
+	}
+};
+var $author$project$About$rawMd = '\n# Welcome to my website!\n\nI plan to use this to publish a bit more information about \nprojects I\'ve been working on, and perhaps other things at some\n point.\n\n\nThis site might be a bit broken. I\'m pretty new to web development.\n\n## About me\n\nI am a young pacific-northwesterner with interests including software/game\n development and robotics.\n';
 var $author$project$About$pageContent = function () {
 	var _v0 = $author$project$CMarkdown$toElements($author$project$About$rawMd);
 	if (_v0.$ === 'Err') {
@@ -20227,6 +20315,67 @@ var $author$project$About$pageContent = function () {
 			content);
 	}
 }();
+var $author$project$Contact$rawMd = '\n# Contact\n\nThe best ways to contact me are generally by email or via discord.\n\nEmail: theo@seelye.net\n\nDiscord: C34A#4444\n';
+var $author$project$Contact$pageContent = function () {
+	var _v0 = $author$project$CMarkdown$toElements($author$project$Contact$rawMd);
+	if (_v0.$ === 'Err') {
+		var str = _v0.a;
+		return $author$project$Boilerplate$whitetext(str);
+	} else {
+		var content = _v0.a;
+		return A2(
+			$mdgriffith$elm_ui$Element$column,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+				]),
+			content);
+	}
+}();
+var $author$project$Projects$project = function (data) {
+	return A2(
+		$mdgriffith$elm_ui$Element$link,
+		_List_Nil,
+		{
+			label: A2(
+				$mdgriffith$elm_ui$Element$column,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$mdgriffith$elm_ui$Element$el,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$color($author$project$CColors$light),
+								$mdgriffith$elm_ui$Element$Font$size(32)
+							]),
+						$mdgriffith$elm_ui$Element$text(data.name)),
+						A2(
+						$mdgriffith$elm_ui$Element$el,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$color($author$project$CColors$light),
+								$mdgriffith$elm_ui$Element$Font$size(24)
+							]),
+						$mdgriffith$elm_ui$Element$text(data.description))
+					])),
+			url: data.url
+		});
+};
+var $author$project$Projects$pageContent = $author$project$Projects$colPage(
+	_List_fromArray(
+		[
+			A2(
+			$mdgriffith$elm_ui$Element$el,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$Font$size(36),
+					$mdgriffith$elm_ui$Element$Font$color($author$project$CColors$light)
+				]),
+			$mdgriffith$elm_ui$Element$text('Projects')),
+			$author$project$Projects$project(
+			{description: 'retro virtual machine', name: 'VM1', url: '/project/vm1'})
+		]));
 var $elm$html$Html$iframe = _VirtualDom_node('iframe');
 var $author$project$Resume$rawMd = '\n# Resume\n\nThis is obviously a sanitized version of my resumé, without identifying information.\nIf you would like a copy of my full resumé, contact me.\n';
 var $author$project$Resume$pageContent = function () {
@@ -20259,17 +20408,42 @@ var $author$project$Resume$pageContent = function () {
 					])));
 	}
 }();
+var $author$project$Pages$routeToString = function (route) {
+	switch (route.$) {
+		case 'About':
+			return 'About';
+		case 'Contact':
+			return 'Contact';
+		case 'Resume':
+			return 'Resume';
+		case 'Projects':
+			return 'Projects';
+		case 'Project':
+			var str = route.a;
+			return 'Project (' + (str + ')');
+		default:
+			return 'Page Not Found';
+	}
+};
 var $author$project$Pages$getPage = function (route) {
 	switch (route.$) {
 		case 'About':
 			return $author$project$About$pageContent;
 		case 'Resume':
 			return $author$project$Resume$pageContent;
+		case 'Contact':
+			return $author$project$Contact$pageContent;
+		case 'Projects':
+			return $author$project$Projects$pageContent;
+		case 'Project':
+			var p = route.a;
+			return $author$project$Projects$getProjectPage(p);
 		default:
 			return A2(
 				$mdgriffith$elm_ui$Element$el,
 				_List_Nil,
-				$mdgriffith$elm_ui$Element$text('todo!'));
+				$mdgriffith$elm_ui$Element$text(
+					$author$project$Pages$routeToString(route)));
 	}
 };
 var $mdgriffith$elm_ui$Internal$Model$OnlyDynamic = F2(
