@@ -17,7 +17,7 @@ rawMd = """
 
 The best ways to contact me are generally by email or via discord.
 
-Email: theo@seelye.net
+Email: contact@C34A.dev
 
 Discord: C34A#4444
 """
