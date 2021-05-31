@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Main</title>
+  <link rel="favicon" type="image/ico" href="favicon.ico"  />
   <style>body { padding: 0; margin: 0; }</style>
 </head>
 
@@ -20262,7 +20263,7 @@ var $author$project$Projects$getProjectPage = function (proj) {
 			return $author$project$Projects$colPage(
 				_List_fromArray(
 					[
-						$author$project$Projects$tryMarkdown('\n# VM1\n\nThis is the main project I am working on, currently.\nVM1 is a very minimal virtual machine, inspired by Apple 2 era computers, and intended for retro game programming.\nIt\'s still pretty thoroughtly not done, but is technically turing complete in its current state.\n'),
+						$author$project$Projects$tryMarkdown('\n# VM1\n\n## NOTE: this post is now pretty outdated, as this project has progressed a lot. Check out the github page for more up to date info!\n\nThis is the main project I am working on, currently.\nVM1 is a very minimal virtual machine, inspired by Apple 2 era computers, and intended for retro game programming.\nIt\'s still pretty thoroughtly not done, but is technically turing complete in its current state.\n'),
 						A2(
 						$mdgriffith$elm_ui$Element$link,
 						_List_fromArray(
@@ -20277,6 +20278,8 @@ var $author$project$Projects$getProjectPage = function (proj) {
 						}),
 						$author$project$Projects$tryMarkdown('\n\n## features\n- simple instructionset (i am lazy)\n- built-in assembler\n- windowed output\n\n## example\n\nA short program that continuously prints out the alphabet:\n\n```\n\nset r0 65 ; \'A\'\n\nset r1 31167 ; screen start addr\n\nset r2 32767 ; screen end + 1\n\nset r4 91 ; \'Z\' + 1\n\nloop:\n\nstore r0 @r1 ; write to "pixel"\n\ninc r1 1 ; next addr\n\ninc r0 1 ; next char\n\njlt r0 r4 :test ; don\'t go past \'Z\'\n\nset r0 65\n\ntest:\n\njlt r1 r2 :loop ; if at end, draw and reset drawing pointer\n\ndraw\n\nset r1 31167\n\njmp :loop\n\n```\n\nIt isn\'t actually all on one line, for some reason the markdown library I\'m using for this site is deleting all the newlines. \ndunno. I\'m probably going to remake the site with gatsby or next.js or something at some point, so I don\'t *really* care.\n\n![a screenshot](https://github.com/C34A/vm1/blob/master/res/screenshot.png?raw=true)\n')
 					]));
+		case 'usg':
+			return $author$project$Projects$tryMarkdown('\n![a screenshot](/res/usg_screenshot_small.png?raw=true)\n# Untitled Space Game\n\nThis is a project I have been working on since about march of 2020, on and off. It was originally what I switched to working on for my projects in CS class when we went into lockdown.\n\nUntitled Space Game (which definitely does need a name) is intended to be a multiplayer first person shooter, featuring novel zero-G movement mechanics. Its current state is very unpollished, but it does have the core gameplay features. Last time I was working on it, I got it to a state where multiple weapon options were mostly implemented.\n\nUntitled Space Game is also currently the best showcase I have of my current 3D art skills. The art style of this game was intended to be a mix of current technologies as well as more sci-fi concepts but still rooted in what is known to be possible. I made almost all of the art assets for this game myself in blender, which I ended up learning a lot from.\n\nI have mostly stopped working on this project however, since while I like the project I wasn\'t particularly enjoying using Unity, and the codebase was somewhat awkward to work with (which is entirely my fault...). If I do come back to it, I will probably move to a different engine such as Godot or Unreal (or something I make potentially), since most of the code could use being rewritten anyway.\n');
 		default:
 			return A2(
 				$mdgriffith$elm_ui$Element$paragraph,
@@ -20374,7 +20377,9 @@ var $author$project$Projects$pageContent = $author$project$Projects$colPage(
 				]),
 			$mdgriffith$elm_ui$Element$text('Projects')),
 			$author$project$Projects$project(
-			{description: 'retro virtual machine', name: 'VM1', url: '/project/vm1'})
+			{description: 'retro virtual machine', name: 'VM1', url: '/project/vm1'}),
+			$author$project$Projects$project(
+			{description: 'zero-G muliplayer first person shooter', name: 'Untitled Space Game', url: '/project/usg'})
 		]));
 var $elm$html$Html$iframe = _VirtualDom_node('iframe');
 var $author$project$Resume$rawMd = '\n# Resume\n\nThis is obviously a sanitized version of my resumé, without identifying information.\nIf you would like a copy of my full resumé, contact me.\n';

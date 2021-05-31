@@ -19,6 +19,7 @@ pageContent =
     colPage
         [ el [size 36, color CColors.light] (text "Projects")
         , project { name = "VM1", description = "retro virtual machine", url = "/project/vm1"}
+        , project { name = "Untitled Space Game", description = "zero-G muliplayer first person shooter", url = "/project/usg"}
         ]
 
 getProjectPage : String -> Element msg
@@ -29,6 +30,8 @@ getProjectPage proj =
         "vm1" -> colPage [
             tryMarkdown """
 # VM1
+
+## NOTE: this post is now pretty outdated, as this project has progressed a lot. Check out the github page for more up to date info!
 
 This is the main project I am working on, currently.
 VM1 is a very minimal virtual machine, inspired by Apple 2 era computers, and intended for retro game programming.
@@ -86,6 +89,18 @@ dunno. I'm probably going to remake the site with gatsby or next.js or something
 ![a screenshot](https://github.com/C34A/vm1/blob/master/res/screenshot.png?raw=true)
 """
             ]
+        "usg" -> tryMarkdown """
+![a screenshot](/res/usg_screenshot_small.png?raw=true)
+# Untitled Space Game
+
+This is a project I have been working on since about march of 2020, on and off. It was originally what I switched to working on for my projects in CS class when we went into lockdown.
+
+Untitled Space Game (which definitely does need a name) is intended to be a multiplayer first person shooter, featuring novel zero-G movement mechanics. Its current state is very unpollished, but it does have the core gameplay features. Last time I was working on it, I got it to a state where multiple weapon options were mostly implemented.
+
+Untitled Space Game is also currently the best showcase I have of my current 3D art skills. The art style of this game was intended to be a mix of current technologies as well as more sci-fi concepts but still rooted in what is known to be possible. I made almost all of the art assets for this game myself in blender, which I ended up learning a lot from.
+
+I have mostly stopped working on this project however, since while I like the project I wasn't particularly enjoying using Unity, and the codebase was somewhat awkward to work with (which is entirely my fault...). If I do come back to it, I will probably move to a different engine such as Godot or Unreal (or something I make potentially), since most of the code could use being rewritten anyway.
+"""
         _ -> Element.paragraph [] [tryMarkdown "Page not found!", link [color CColors.lightblue, underline] {url = "/projects", label = text "Return to projects page"}]
 
 tryMarkdown text =
