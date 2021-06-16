@@ -77,16 +77,12 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
     showDivs(slideIndex, 'portSlides'); // need this for each slideshow
     
     function plusDivs(n, c) {
-        console.log(c);
-        console.log('wtf');
       showDivs(slideIndex += n, c);
     }
     
     function showDivs(n, c) {
       var i;
       var x = document.getElementsByClassName(c);
-      console.log(c);
-      console.log(x);
       if (n > x.length) {slideIndex = 1}
       if (n < 1) {slideIndex = x.length}
       for (i = 0; i < x.length; i++) {
