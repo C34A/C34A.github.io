@@ -71,6 +71,7 @@ boilerplate vp content =
               , wlink "/resume" "resumé"
               , wlink "/projects" "projects"
               , wlink "/contact" "contact"
+              , wlink "/portfolio/portfolio" "photography portfolio"
               ]
           ]
       , el 

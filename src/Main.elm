@@ -5,6 +5,7 @@ import Element.Background as Background
 import Browser
 import Browser.Dom
 import Browser.Dom exposing (Viewport)
+import Browser.Navigation exposing (load)
 import Task
 
 import Url
@@ -55,7 +56,7 @@ update msg model =
       ( { model 
           | url = url
           , page = Pages.parseRoute url}
-      , Cmd.none 
+      , if url.path == "/portfolio/portfolio" then load (url.path ++ ".html") else Cmd.none
       )
     LinkClicked urlRequest ->
       case urlRequest of
